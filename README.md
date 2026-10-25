@@ -1,4 +1,4 @@
-# LazyDesk 2.0
+# LazyDesk 
 
 A local-first file organization workspace with a polished dashboard, transparent rule-based suggestions, duplicate candidates, and optional semantic categorization using an open-source sentence-embedding model.
 
