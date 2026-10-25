@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11101b">
+  <meta name="description" content="LazyDesk is a local-first file organization workspace with transparent suggestions and optional open-source AI semantic categorization.">
+  <title>LazyDesk — Your files, finally in order</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="LazyDesk home">
+        <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 7.5A2.5 2.5 0 0 1 6 5h4l2 2h6a2.5 2.5 0 0 1 2.5 2.5v7A2.5 2.5 0 0 1 18 19H6a2.5 2.5 0 0 1-2.5-2.5z"/><path d="M4 10h16"/></svg></span>
+        <span>lazy<span class="brand-accent">desk</span><small>YOUR FILES, IN FLOW</small></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <button class="nav-item active" data-view="overview"><span>◫</span> Overview <kbd>1</kbd></button>
+        <button class="nav-item" data-view="files"><span>▤</span> All files <span class="nav-count" id="navFileCount">0</span></button>
+        <button class="nav-item" data-view="duplicates"><span>⧉</span> Duplicate candidates <span class="nav-count" id="navDupCount">0</span></button>
+        <button class="nav-item" data-view="activity"><span>↻</span> Activity</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="ai-mini">
+          <div class="ai-orb">✳</div>
+          <div><strong>Smart suggestions</strong><p>Rule-based now · optional AI</p></div>
+          <span class="status-dot"></span>
+        </div>
+        <button class="nav-item" id="helpButton"><span>ⓘ</span> How it works</button>
+        <div class="profile">
+          <div class="avatar">LD</div><div><strong>Local workspace</strong><p>Your files stay in your browser</p></div>
+          <span class="lock">⌑</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="menuButton" aria-label="Toggle navigation">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong id="crumbView">Overview</strong></div>
+        <div class="top-actions">
+          <div class="local-badge"><span class="status-dot"></span> Local-first</div>
+          <button class="icon-button" id="themeButton" aria-label="Toggle light and dark theme" title="Toggle theme">☼</button>
+          <button class="avatar avatar-small" id="aboutButton" aria-label="About LazyDesk">LD</button>
+        </div>
+      </header>
+
+      <section class="view-panel active-view" id="overviewView">
+        <div class="welcome-row">
+          <div><div class="eyebrow"><span class="sparkle">✦</span> YOUR PERSONAL FILE WORKSPACE</div>
+            <h1>A little less <span class="gradient-text">digital chaos.</span></h1>
+            <p class="subhead">Bring your files together. Get transparent suggestions. Stay in control.</p>
+          </div>
+          <button class="primary-button" id="addFilesTop"><span>＋</span> Add files <kbd>U</kbd></button>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon purple">▤</span><span class="stat-label">FILES SCANNED</span><span class="trend">LIVE</span></div><div class="stat-value" id="statFiles">0</div><div class="stat-foot">Files in this session</div><div class="stat-decoration decor-one"></div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon blue">◈</span><span class="stat-label">TOTAL SIZE</span></div><div class="stat-value" id="statSize">0 B</div><div class="stat-foot">Combined selected file size</div><div class="stat-decoration decor-two"></div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon amber">✳</span><span class="stat-label">SUGGESTIONS</span></div><div class="stat-value" id="statSuggestions">0</div><div class="stat-foot">Categories suggested</div><div class="stat-decoration decor-three"></div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon rose">⧉</span><span class="stat-label">DUPLICATE CANDIDATES</span></div><div class="stat-value" id="statDuplicates">0</div><div class="stat-foot">Same name and size</div><div class="stat-decoration decor-four"></div></article>
+        </div>
+
+        <section class="workspace-card">
+          <div class="section-heading"><div><h2>Bring in your files</h2><p>Everything stays in this browser session unless you export a plan.</p></div><span class="step-pill"><span>01</span> IMPORT</span></div>
+          <label class="drop-zone" id="dropZone" for="fileInput" tabindex="0">
+            <input type="file" id="fileInput" multiple hidden>
+            <div class="upload-art"><div class="upload-cloud">↑</div><span class="orbit orbit-a"></span><span class="orbit orbit-b"></span></div>
+            <h3>Drop files to get started</h3><p>or <span class="text-link">browse your device</span> to choose files</p>
+            <div class="file-type-pills"><span>PDF</span><span>DOCX</span><span>PNG</span><span>CSV</span><span>ZIP</span><span>+ more</span></div>
+          </label>
+          <div class="privacy-note"><span>♧</span><div><strong>Private by design</strong><p>LazyDesk reads file names, extensions and sizes for this demo. It does not upload files or move them on your device.</p></div></div>
+        </section>
+
+        <section class="workspace-card files-card">
+          <div class="section-heading"><div><h2>Organization desk <span class="count-bubble" id="tableCount">0</span></h2><p>Review suggestions before exporting your plan.</p></div><div class="heading-actions"><button class="secondary-button" id="exportCsv">Export CSV ↗</button><button class="primary-button compact" id="exportJson">Export plan <span>↗</span></button></div></div>
+          <div class="toolbar">
+            <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search files or extensions…" aria-label="Search files"></label>
+            <select id="categoryFilter" aria-label="Filter by category"><option value="all">All categories</option></select>
+            <select id="sortSelect" aria-label="Sort files"><option value="name">Name A–Z</option><option value="size-desc">Largest first</option><option value="size-asc">Smallest first</option><option value="category">Category</option><option value="type">File type</option></select>
+            <div class="view-toggle" role="group" aria-label="Layout"><button class="selected" id="tableViewButton" title="Table view" aria-label="Table view">☷</button><button id="gridViewButton" title="Grid view" aria-label="Grid view">▦</button></div>
+          </div>
+          <div class="table-wrap" id="tableWrap"><table><thead><tr><th>FILE NAME</th><th>TYPE</th><th>SUGGESTED CATEGORY</th><th>SIZE</th><th>STATUS</th><th></th></tr></thead><tbody id="fileTableBody"></tbody></table></div>
+          <div class="file-grid hidden" id="fileGrid"></div>
+          <div class="empty-state" id="emptyState"><div class="empty-illustration">▤</div><h3>Your desk is looking peaceful</h3><p>Add a few files and LazyDesk will suggest where they belong.</p><button class="secondary-button" id="emptyAddButton">＋ Choose files</button></div>
+          <div class="table-footer"><span id="showingText">No files yet</span><button class="text-button" id="clearFiles">Clear session</button></div>
+        </section>
+      </section>
+
+      <section class="view-panel" id="filesView">
+        <div class="page-heading"><div><div class="eyebrow">YOUR WORKSPACE</div><h1>All files</h1><p class="subhead">Search, sort, and adjust suggested categories.</p></div><button class="primary-button" id="addFilesAll">＋ Add files</button></div>
+        <div class="workspace-card"><div class="toolbar"><label class="search-box"><span>⌕</span><input id="searchInputAll" type="search" placeholder="Search all files…"></label><select id="categoryFilterAll"><option value="all">All categories</option></select><select id="sortSelectAll"><option value="name">Name A–Z</option><option value="size-desc">Largest first</option><option value="size-asc">Smallest first</option><option value="category">Category</option><option value="type">File type</option></select></div><div class="table-wrap"><table><thead><tr><th>FILE NAME</th><th>TYPE</th><th>SUGGESTED CATEGORY</th><th>SIZE</th><th>STATUS</th><th></th></tr></thead><tbody id="allFileTableBody"></tbody></table></div><div class="empty-state" id="allEmptyState"><div class="empty-illustration">▤</div><h3>No files yet</h3><p>Add files from Overview to begin.</p></div></div>
+      </section>
+
+      <section class="view-panel" id="duplicatesView">
+        <div class="page-heading"><div><div class="eyebrow">CLEANUP ASSISTANT</div><h1>Duplicate candidates</h1><p class="subhead">Potential matches based on identical file names and sizes.</p></div></div>
+        <div class="notice-card"><span class="notice-icon">ⓘ</span><div><strong>Not a content-level duplicate check</strong><p>Two files can share a name and size but contain different data. Verify them before deleting anything. LazyDesk never deletes files.</p></div></div>
+        <div class="workspace-card"><div class="table-wrap"><table><thead><tr><th>FILE NAME</th><th>TYPE</th><th>SIZE</th><th>MATCH GROUP</th></tr></thead><tbody id="duplicateTableBody"></tbody></table></div><div class="empty-state" id="duplicateEmptyState"><div class="empty-illustration">⧉</div><h3>No duplicate candidates found</h3><p>Add files with matching names and sizes to see possible matches here.</p></div></div>
+      </section>
+
+      <section class="view-panel" id="activityView">
+        <div class="page-heading"><div><div class="eyebrow">RECENT CHANGES</div><h1>Activity</h1><p class="subhead">A transparent log of actions taken in this session.</p></div><button class="secondary-button" id="clearActivity">Clear activity</button></div>
+        <div class="workspace-card"><div class="activity-list" id="activityList"></div><div class="empty-state" id="activityEmptyState"><div class="empty-illustration">↻</div><h3>No activity yet</h3><p>Your imports, category edits and exports will appear here.</p></div></div>
+      </section>
+
+      <footer class="app-footer"><span>✦ LazyDesk <span id="footerYear"></span></span><span>Built for calmer digital spaces · <a href="#" id="footerHow">How it works</a></span><span class="footer-local"><span class="status-dot"></span> Files stay local</span></footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><span class="toast-icon">✓</span><span id="toastMessage">Done</span></div>
+  <div class="modal-backdrop hidden" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card"><button class="modal-close" id="modalClose" aria-label="Close dialog">×</button><div class="modal-symbol">✦</div><h2 id="modalTitle">How LazyDesk works</h2><div id="modalContent"><p>LazyDesk is a local-first organization assistant.</p></div><button class="primary-button modal-ok" id="modalOk">Got it</button></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
